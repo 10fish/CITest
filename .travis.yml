@@ -1,0 +1,21 @@
+sudo: true
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t 10fish/rails_web:latest docker
+  - docker run -d 10fish/rails_web
+  - gem install rails bundler
+
+script:
+  - echo "Starting to build and run rails web..."
+  - bundle install
+
+after_success:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then
+  docker login -e="ohth@sina.com" -u="10fish" -p="abc83745"
+  docker push 10fish/rails_web
+  fi
