@@ -16,6 +16,6 @@ script:
 
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="ohth@sina.com" -u="10fish" -p="abc83745";
+    docker login -u="10fish" -p="abc83745";
     docker push 10fish/rails_web;
   fi
